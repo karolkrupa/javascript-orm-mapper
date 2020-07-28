@@ -1,0 +1,24 @@
+{
+  "name": "javascript-orm-mapper",
+  "version": "1.0.0",
+  "description": "Javascript orm mapper",
+  "main": "dist/test.js",
+  "types": "dist/types/ErrorResponse.d.ts",
+  "scripts": {
+    "test": "mocha -r ts-node/register tests/*"
+  },
+  "author": "Karol Krupa (karo2krupa@gmail.com)",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5",
+    "vuex": "^3.5.1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2"
+  },
+  "repository": "https://github.com/karolkrupa/symfony-js-form-parser"
+}
