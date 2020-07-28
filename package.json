@@ -1,6 +1,6 @@
 {
   "name": "javascript-orm-mapper",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Javascript orm mapper",
   "main": "dist/test.js",
   "types": "dist/types/ErrorResponse.d.ts",
