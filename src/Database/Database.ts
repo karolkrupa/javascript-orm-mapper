@@ -21,10 +21,10 @@ export default class Database implements DatabaseInterface{
 
     protected entities: EntitiesMap = {}
 
-    protected modelsRegister: ModelsRegister = null
+    protected modelsRegistry: ModelsRegister = null
 
     constructor() {
-        this.modelsRegister = new ModelsRegister()
+        this.modelsRegistry = new ModelsRegister()
     }
 
     public persist(entity: Model) {
@@ -75,11 +75,11 @@ export default class Database implements DatabaseInterface{
     }
 
     registerModel(model: typeof Model) {
-        this.modelsRegister.register(model)
+        this.modelsRegistry.register(model)
     }
 
     getModel(entityName: string) {
-        return this.modelsRegister.get(entityName)
+        return this.modelsRegistry.get(entityName)
     }
 
 

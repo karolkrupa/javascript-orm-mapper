@@ -5,7 +5,7 @@
   "main": "dist/test.js",
   "types": "dist/types/ErrorResponse.d.ts",
   "scripts": {
-    "test": "mocha -r ts-node/register tests/*"
+    "test": "mocha -r ts-node/register $(find tests -name '*.ts') --recursive"
   },
   "author": "Karol Krupa (karo2krupa@gmail.com)",
   "license": "MIT",
