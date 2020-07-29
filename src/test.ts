@@ -1,13 +1,17 @@
 import ModelMapper from "./Mapper/ModelMapper";
-import database from "./Database";
+// import database from "./Database";
+
 import Post from "./Post";
-import Comment from "./Comment";
+import "./Comment";
+import database from "./db";
 
-database.register(Post)
-database.register(Comment)
+// database.register(Post)
+// database.register(Comment)
 
+// let post = new Post()
+// let comment = new Comment()
 
-let model = <Post>ModelMapper.persist({
+let post = ModelMapper.persist({
     id: 1,
     name: 123,
     comments: [
@@ -22,4 +26,14 @@ let model = <Post>ModelMapper.persist({
 }, Post)
 
 
-console.log(model)
+console.log(post)
+// console.log(database)
+
+
+// import database from "./db";
+// import Post from "./Post";
+//
+// let post = new Post()
+//
+// // @ts-ignore
+// console.log('test', database.modelsRegister)

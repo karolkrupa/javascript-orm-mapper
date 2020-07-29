@@ -3,11 +3,13 @@ import Model from "./Model";
 import Id from "./DataType/Id";
 import ManyToOne from "./DataType/ManyToOne";
 import Post from "./Post";
+import EntityName from "./Database/Decorator/EntityName";
+import Database from "./Database/Decorator/Database";
+import database from "./db";
 
-
+@Database(database)
+@EntityName('comment')
 export default class Comment extends Model {
-    static entity: string = 'comment'
-
     @Id()
     id: string = ''
 

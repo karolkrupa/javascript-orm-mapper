@@ -1,3 +1,3 @@
 export default class Model {
-    static entity: string;
+    public __orm_uid: string = null
 }

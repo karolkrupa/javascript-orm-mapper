@@ -1,6 +1,5 @@
 import Model from "../Model";
 import MappingHelper from "./MappingHelper";
-import database from "../Database";
 
 export default class ModelMapper {
     static map(data: {}, model: Model) {
@@ -11,7 +10,6 @@ export default class ModelMapper {
                 model[field] = fields[field].normalize(data[field])
             }
         }
-
     }
 
     static persist(data: {}, model: typeof Model) {
@@ -21,7 +19,8 @@ export default class ModelMapper {
         if(data[idFieldName]) {
             entity[idFieldName] = data[idFieldName]
         }
-        database.persist(entity)
+
+        MappingHelper.getDatabase(model).persist(entity)
 
         this.map(data, entity)
 

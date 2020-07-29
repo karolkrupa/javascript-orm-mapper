@@ -1,10 +1,15 @@
 import {Type} from "../DataType/Type";
 import {IdType} from "../DataType/Id";
+import DatabaseInterface from "../Database/DatabaseInterface";
 
 export default class ObjectMapping {
+    private entityName: string = null
+
     private fields: { [key: string]: Type } = {}
 
     private idField: string = null
+
+    private database: DatabaseInterface = null
 
     public addField(name: string, type: Type) {
         if(type instanceof IdType) {
@@ -24,5 +29,21 @@ export default class ObjectMapping {
 
     public getIdField() {
         return this.idField
+    }
+
+    public getEntityName(): string {
+        return this.entityName
+    }
+
+    public setEntityName(name: string) {
+        this.entityName = name
+    }
+
+    public getDatabase(): DatabaseInterface {
+        return this.database
+    }
+
+    public setDatabase(database: DatabaseInterface) {
+        this.database = database
     }
 }

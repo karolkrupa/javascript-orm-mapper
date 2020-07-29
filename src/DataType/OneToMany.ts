@@ -1,6 +1,5 @@
 import {Type} from "./Type";
 import MappingHelper from "../Mapper/MappingHelper";
-import database from "../Database";
 import ModelMapper from "../Mapper/ModelMapper";
 
 export class OneToMany extends Type {
@@ -13,6 +12,8 @@ export class OneToMany extends Type {
     }
 
     public normalize(data: any): any {
+        let database = this.getDatabase();
+
         let model = database.getModel(this.entityName);
         let idField = MappingHelper.getObjectIdFieldName(model)
 
@@ -21,7 +22,7 @@ export class OneToMany extends Type {
 
         let returnArray = []
         for (let entityData of data) {
-            let entity = database.get(model, entityData[idField])
+            let entity = database.getById(model, entityData[idField])
             if(!entity) {
                 entity = ModelMapper.persist(entityData, model)
             }

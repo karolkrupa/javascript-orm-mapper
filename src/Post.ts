@@ -3,12 +3,14 @@ import Model from "./Model";
 import Comment from "./Comment";
 import Id from "./DataType/Id";
 import OneToMany from "./DataType/OneToMany";
+import EntityName from "./Database/Decorator/EntityName";
+import Database from "./Database/Decorator/Database";
+import database from "./db";
 
-console.log('POST', Id)
 
+@Database(database)
+@EntityName('post')
 export default class Post extends Model {
-    static entity: string = 'post'
-
     @Id()
     id: string = ''
 
