@@ -11,7 +11,7 @@ import database from "./db";
 // let post = new Post()
 // let comment = new Comment()
 
-let post = ModelMapper.persist({
+let post = <Post>ModelMapper.persist({
     id: 1,
     name: 123,
     comments: [
@@ -19,7 +19,8 @@ let post = ModelMapper.persist({
             id: 1,
             content: "Lorem ipsum",
             post: {
-                id: 1
+                id: 1,
+                name: "New name"
             }
         }
     ]
@@ -27,6 +28,17 @@ let post = ModelMapper.persist({
 
 
 console.log(post)
+
+// ModelMapper.map({
+//     id: 1,
+//     name: 123,
+//     comments: [
+//
+//     ]
+// }, post)
+//
+// console.log(post)
+// console.log(post.comments.length)
 // console.log(database)
 
 
