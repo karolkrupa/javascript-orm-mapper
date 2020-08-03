@@ -21,3 +21,12 @@ export default {
     Model,
     MappingHelper
 }
+
+export {
+    decorators,
+    types,
+    Database,
+    ModelMapper,
+    Model,
+    MappingHelper
+}
