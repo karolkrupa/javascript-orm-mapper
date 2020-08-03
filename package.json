@@ -2,8 +2,8 @@
   "name": "javascript-orm-mapper",
   "version": "0.0.1",
   "description": "Javascript orm mapper",
-  "main": "dist/test.js",
-  "types": "dist/types/ErrorResponse.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register $(find tests -name '*.ts') --recursive"
   },
