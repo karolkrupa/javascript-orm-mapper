@@ -1,15 +1,10 @@
 import ModelMapper from "./Mapper/ModelMapper";
-// import database from "./Database";
 
+//
+// IMPORTANT: We have to import all entities for load all annotations
+//
 import Post from "./Post";
 import "./Comment";
-import database from "./db";
-
-// database.register(Post)
-// database.register(Comment)
-
-// let post = new Post()
-// let comment = new Comment()
 
 let post = <Post>ModelMapper.persist({
     id: 1,
@@ -28,24 +23,3 @@ let post = <Post>ModelMapper.persist({
 
 
 console.log(post)
-
-// ModelMapper.map({
-//     id: 1,
-//     name: 123,
-//     comments: [
-//
-//     ]
-// }, post)
-//
-// console.log(post)
-// console.log(post.comments.length)
-// console.log(database)
-
-
-// import database from "./db";
-// import Post from "./Post";
-//
-// let post = new Post()
-//
-// // @ts-ignore
-// console.log('test', database.modelsRegister)

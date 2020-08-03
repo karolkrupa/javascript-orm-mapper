@@ -1,6 +1,7 @@
 import {Type} from "../DataType/Type";
 import {IdType} from "../DataType/Id";
 import DatabaseInterface from "../Database/DatabaseInterface";
+import IdTypeAlreadyDeclaredError from "./Exception/IdTypeAlreadyDeclaredError";
 
 export default class ObjectMapping {
     private entityName: string = null
@@ -13,6 +14,9 @@ export default class ObjectMapping {
 
     public addField(name: string, type: Type) {
         if(type instanceof IdType) {
+            if(this.idField !== null) {
+                throw new IdTypeAlreadyDeclaredError('Id type on entity ' + this.entityName + ' already declared')
+            }
             this.idField = name
         }
         this.fields[name] = type
@@ -27,7 +31,7 @@ export default class ObjectMapping {
         return this.fields
     }
 
-    public getIdField() {
+    public getIdField(): string {
         return this.idField
     }
 
