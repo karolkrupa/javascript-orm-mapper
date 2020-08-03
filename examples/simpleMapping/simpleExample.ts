@@ -1,4 +1,4 @@
-import ModelMapper from "./Mapper/ModelMapper";
+import ModelMapper from "../../src/Mapper/ModelMapper";
 
 //
 // IMPORTANT: We have to import all entities for load all annotations
