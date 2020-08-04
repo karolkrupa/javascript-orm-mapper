@@ -10,6 +10,11 @@ OneToMany
 $ npm i javascript-orm-mapper
 ```
 
+## Tests
+```bash
+$ npm test
+```
+
 ## Defining Models
 
 You can define models just like normal classes. There are no limits, you can define own methods, 
