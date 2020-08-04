@@ -1,4 +1,5 @@
 # Javascript orm mapper
+[![Build Status](https://travis-ci.org/karolkrupa/javascript-orm-mapper.svg?branch=master)](https://travis-ci.org/karolkrupa/javascript-orm-mapper)
 
 This library provides a simple way to map data from json to
 javascript objects that use multiple data types, including relational data types, for example:
