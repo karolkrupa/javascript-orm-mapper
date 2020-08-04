@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "test": "mocha -r ts-node/register $(find tests -name '*.ts') --recursive"
+    "test": "mocha -r ts-node/register $(find tests -name '*.ts') --recursive",
+    "test:coverage": "nyc --reporter=html npm run test"
   },
   "author": "Karol Krupa (karo2krupa@gmail.com)",
   "license": "MIT",
@@ -18,7 +19,8 @@
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
-    "@types/mocha": "^7.0.2"
+    "@types/mocha": "^7.0.2",
+    "nyc": "^15.1.0"
   },
   "repository": "https://github.com/karolkrupa/symfony-js-form-parser"
 }
