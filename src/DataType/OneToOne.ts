@@ -1,12 +1,12 @@
 import MappingHelper from "../Mapper/MappingHelper";
-import { ManyToOne } from "./ManyToOne";
+import { ManyToOneType } from "./ManyToOne";
 
-export class OneToOne extends ManyToOne {
+export class OneToOneType extends ManyToOneType {
 
 }
 
 export default (entityName: string): PropertyDecorator => {
-    let type = new OneToOne(entityName)
+    let type = new OneToOneType(entityName)
 
     return MappingHelper.getTypeDecorator(type)
 }

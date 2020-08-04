@@ -1,11 +1,12 @@
 import {expect} from 'chai'
 import Model from "../../src/Model";
-import Id from "../../src/DataType/Id";
+import Id from "../../src/Database/Decorator/Id";
 import ModelMapper from "../../src/Mapper/ModelMapper";
 import Database from "../../src/Database/Database";
 import DatabaseAnnotation from "../../src/Database/Decorator/Database";
 import EntityName from "../../src/Database/Decorator/EntityName";
 import String from "../../src/DataType/String";
+import Integer from "../../src/DataType/Integer";
 
 const database = new Database();
 
@@ -13,6 +14,7 @@ const database = new Database();
 @EntityName('ExampleEntity')
 class ExampleEntity extends Model {
     @Id()
+    @Integer()
     id: string
 
     @String()
@@ -30,7 +32,7 @@ describe('Model mapper', function () {
         }, entity);
 
         expect(entity).to.not.have.property('extra_field')
-        expect(entity).to.have.property('id').and.equals('1')
+        expect(entity).to.have.property('id').and.equals(1)
     })
 
     it('should map data without all model fields and keep original model data', function () {
@@ -40,7 +42,7 @@ describe('Model mapper', function () {
             id: 1
         }, entity);
 
-        expect(entity).to.have.property('id').and.equals('1')
+        expect(entity).to.have.property('id').and.equals(1)
         expect(entity).to.have.property('name').and.equals('my_name')
     })
 
@@ -52,7 +54,7 @@ describe('Model mapper', function () {
             name: null
         }, entity);
 
-        expect(entity).to.have.property('id').and.equals('1')
+        expect(entity).to.have.property('id').and.equals(1)
         expect(entity).to.have.property('name').and.equals(null)
     })
 
@@ -63,8 +65,26 @@ describe('Model mapper', function () {
         }, ExampleEntity);
 
         expect(entity).to.not.have.property('extra_field')
-        expect(entity).to.have.property('id').and.equals('1')
+        expect(entity).to.have.property('id').and.equals(1)
         expect(database.getById(ExampleEntity, 1)).eq(entity)
+    })
+
+    it('when persisting entity exist in database should map data to existing entity', function () {
+        let entity = ModelMapper.persist({
+            id: 1,
+            extra_field: 'test'
+        }, ExampleEntity);
+
+        expect(entity).to.not.have.property('extra_field')
+        expect(entity).to.have.property('id').and.equals(1)
+        expect(database.getById(ExampleEntity, 1)).eq(entity)
+
+        let newEntity = ModelMapper.persist({
+            id: 1,
+            extra_field: 'test1'
+        }, ExampleEntity);
+
+        expect(newEntity).eq(entity)
     })
 })
 

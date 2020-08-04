@@ -1,10 +1,10 @@
-import {Type} from "./Type";
+import Type from "./Type";
 import MappingHelper from "../Mapper/MappingHelper";
 import ModelMapper from "../Mapper/ModelMapper";
 import Model from "../Model";
 import MappingMode from "../Mapper/MappingMode";
 
-export class OneToMany extends Type {
+export class OneToManyType extends Type {
     private entityName: string = null
 
     constructor(entityName: string) {
@@ -54,7 +54,7 @@ export class OneToMany extends Type {
 }
 
 export default (entityName: string): PropertyDecorator => {
-    let type = new OneToMany(entityName)
+    let type = new OneToManyType(entityName)
 
     return MappingHelper.getTypeDecorator(type)
 }

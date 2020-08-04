@@ -1,13 +1,7 @@
-import {Type} from "./Type";
 import MappingHelper from "../Mapper/MappingHelper";
-import Model from "../Model";
-import MappingMode from "../Mapper/MappingMode";
+import Type from "./Type";
 
-class StringType extends Type {
-    public map(entity: Model, field: string, data: any, mappingMode: MappingMode) {
-        entity[field] = this.normalize(data)
-    }
-
+export class StringType extends Type {
     normalize(data: any): any {
         return data.toString();
     }

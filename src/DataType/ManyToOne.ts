@@ -1,10 +1,10 @@
-import {Type} from "./Type";
+import Type from "./Type";
 import MappingHelper from "../Mapper/MappingHelper";
 import ModelMapper from "../Mapper/ModelMapper";
 import MappingMode from "../Mapper/MappingMode";
 import Model from "../Model";
 
-export class ManyToOne extends Type {
+export class ManyToOneType extends Type {
     private entityName: string = null
 
     constructor(modelName: string) {
@@ -26,6 +26,9 @@ export class ManyToOne extends Type {
     }
 
     public normalize(data: any): any {
+        if(typeof data === 'string') return null
+        if(data === undefined) return null
+        if(data === null) return null
         let database = this.getDatabase()
 
         let model = database.getModel(this.entityName);
@@ -48,7 +51,7 @@ export class ManyToOne extends Type {
 }
 
 export default (entityName: string): PropertyDecorator => {
-    let type = new ManyToOne(entityName)
+    let type = new ManyToOneType(entityName)
 
     return MappingHelper.getTypeDecorator(type)
 }

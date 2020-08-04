@@ -1,14 +1,12 @@
-import {Type} from "./Type";
 import MappingHelper from "../Mapper/MappingHelper";
-import Model from "../Model";
-import MappingMode from "../Mapper/MappingMode";
+import Type from "./Type";
 
-class BooleanType extends Type {
-    public map(entity: Model, field: string, data: any, mappingMode: MappingMode) {
-        entity[field] = this.normalize(data)
-    }
-
+export class BooleanType extends Type {
     normalize(data: any): any {
+        if(data === 'false') return false
+        if(data === 'true') return true
+        if(data === '0') return false
+        if(data === '1') return true
         return !!data
     }
 }

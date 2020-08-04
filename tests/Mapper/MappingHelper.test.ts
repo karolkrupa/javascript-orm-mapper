@@ -3,9 +3,9 @@ import ObjectMapping from "../../src/Mapper/ObjectMapping";
 import Model from "../../src/Model";
 import Database from "../../src/Database/Database";
 import MappingHelper from "../../src/Mapper/MappingHelper";
-import {Type} from "../../src/DataType/Type";
+import Type from "../../src/DataType/Type";
 import MappingMode from "../../src/Mapper/MappingMode";
-import Id, {IdType} from "../../src/DataType/Id";
+import {BooleanType} from "../../src/DataType/Boolean";
 
 
 class Entity extends Model {
@@ -111,22 +111,20 @@ describe('Mapping helper', function () {
         expect(mappedFields).has.property('test').and.equals(type)
     })
 
-    it('getObjectIdFieldName test', function () {
+    it('getObjectId test', function () {
         let { mapping, entity } = getObjectWithMapping()
 
-        let idType = new IdType()
-        mapping.addField('id', idType)
+        mapping.setIdField('id')
 
         entity['id'] = '11'
 
         expect(MappingHelper.getObjectId(entity)).equals('11')
     })
 
-    it('getObjectId test', function () {
+    it('getObjectIdFieldName test', function () {
         let { mapping, entity } = getObjectWithMapping()
 
-        let idType = new IdType()
-        mapping.addField('id_name', idType)
+        mapping.setIdField('id_name')
 
         expect(MappingHelper.getObjectIdFieldName(entity)).equals('id_name')
     })

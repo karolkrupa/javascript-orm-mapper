@@ -1,6 +1,6 @@
 import Boolean from "./Boolean";
 import Float from "./Float";
-import Id from './Id';
+import Id from '../Database/Decorator/Id';
 import Integer from "./Integer";
 import ManyToMany from "./ManyToMany";
 import ManyToOne from "./ManyToOne";

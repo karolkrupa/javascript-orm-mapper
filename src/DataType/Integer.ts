@@ -1,13 +1,7 @@
-import {Type} from "./Type";
+import Type from "./Type";
 import MappingHelper from "../Mapper/MappingHelper";
-import Model from "../Model";
-import MappingMode from "../Mapper/MappingMode";
 
-class IntegerType extends Type {
-    public map(entity: Model, field: string, data: any, mappingMode: MappingMode) {
-        entity[field] = this.normalize(data)
-    }
-
+export class IntegerType extends Type {
     normalize(data: any): any {
         let number = parseInt(data)
         if(isNaN(number)) return null;

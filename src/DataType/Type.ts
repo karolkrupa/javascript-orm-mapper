@@ -3,10 +3,12 @@ import DatabaseInterface from "../Database/DatabaseInterface";
 import MappingHelper from "../Mapper/MappingHelper";
 import MappingMode from "../Mapper/MappingMode";
 
-export abstract class Type {
+export default abstract class Type {
     protected model: typeof Model = null
 
-    abstract map(entity: Model, field: string, data: any, mappingMode: MappingMode);
+    public map(entity: Model, field: string, data: any, mappingMode: MappingMode) {
+        entity[field] = this.normalize(data)
+    }
 
     public normalize(data: any, mode: MappingMode = MappingMode.INSERT) {
         return data

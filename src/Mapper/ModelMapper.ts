@@ -16,14 +16,20 @@ export default class ModelMapper {
     }
 
     static persist(data: {}, model: typeof Model, mode: MappingMode = MappingMode.INSERT) {
-        let entity = new (model)()
-        let idFieldName = MappingHelper.getObjectIdFieldName(entity)
+        let entity = null
+        let idFieldName = MappingHelper.getObjectIdFieldName(model)
 
         if(data[idFieldName]) {
-            entity[idFieldName] = data[idFieldName]
-        }
+            entity = MappingHelper.getDatabase(model).getById(model, data[idFieldName])
 
-        MappingHelper.getDatabase(model).persist(entity)
+            if(!entity) {
+                entity = new (model)()
+                entity[idFieldName] = data[idFieldName]
+                MappingHelper.getDatabase(model).persist(entity)
+            }
+        }else {
+            entity = new (model)()
+        }
 
         this.map(data, entity, mode)
 

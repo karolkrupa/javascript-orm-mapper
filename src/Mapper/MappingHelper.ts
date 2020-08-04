@@ -1,5 +1,5 @@
 import ObjectMapping from "./ObjectMapping";
-import {Type} from "../DataType/Type";
+import Type from "../DataType/Type";
 import Model from "../Model";
 import DatabaseInterface from "../Database/DatabaseInterface";
 
@@ -34,14 +34,21 @@ export default class MappingHelper {
 
     static getObjectMapping(target: Model | typeof Model): ObjectMapping {
         // If model provided
-        if(target['orm']) return target['orm']
-
-        // If entity provided
-        if(!target.constructor['orm']) {
-            target.constructor['orm'] = new ObjectMapping()
+        if(typeof target === (typeof Model)) {
+            if(target['orm'])  return target['orm']
+            target['orm'] = new ObjectMapping()
+            return target['orm']
         }
 
-        return target.constructor['orm']
+        // If entity provided
+        if(target instanceof Model) {
+            if(!target.constructor['orm']) {
+                target.constructor['orm'] = new ObjectMapping()
+            }
+            return target.constructor['orm']
+        }
+
+        throw new Error('Unexpected object')
     }
 
     static getObjectId(target: Model | typeof Model) {

@@ -12,6 +12,7 @@ import database from "./db";
 @EntityName('post')
 export default class Post extends Model {
     @Id()
+    @String()
     id: string = ''
 
     @String()

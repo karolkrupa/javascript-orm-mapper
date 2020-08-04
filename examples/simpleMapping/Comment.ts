@@ -11,6 +11,7 @@ import database from "./db";
 @EntityName('comment')
 export default class Comment extends Model {
     @Id()
+    @String()
     id: string = ''
 
     @String()
