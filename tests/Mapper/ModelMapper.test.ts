@@ -3,15 +3,16 @@ import Model from "../../src/Model";
 import Id from "../../src/Database/Decorator/Id";
 import ModelMapper from "../../src/Mapper/ModelMapper";
 import Database from "../../src/Database/Database";
-import DatabaseAnnotation from "../../src/Database/Decorator/Database";
-import EntityName from "../../src/Database/Decorator/EntityName";
 import String from "../../src/DataType/String";
 import Integer from "../../src/DataType/Integer";
+import Entity from "../../src/Database/Decorator/Entity";
 
 const database = new Database();
 
-@DatabaseAnnotation(database)
-@EntityName('ExampleEntity')
+@Entity({
+    name: 'ExampleEntity',
+    database: database
+})
 class ExampleEntity extends Model {
     @Id()
     @Integer()

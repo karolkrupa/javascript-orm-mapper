@@ -3,12 +3,13 @@ import Model from "../../src/Model";
 import Id from "../../src/DataType/Id";
 import ManyToOne from "../../src/DataType/ManyToOne";
 import Post from "./Post";
-import EntityName from "../../src/Database/Decorator/EntityName";
-import Database from "../../src/Database/Decorator/Database";
 import database from "./db";
+import Entity from "../../src/Database/Decorator/Entity";
 
-@Database(database)
-@EntityName('comment')
+@Entity({
+    name: 'comment',
+    database: database
+})
 export default class Comment extends Model {
     @Id()
     @String()

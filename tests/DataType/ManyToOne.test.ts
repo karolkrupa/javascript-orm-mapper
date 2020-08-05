@@ -3,23 +3,26 @@ import Model from "../../src/Model";
 import MappingMode from "../../src/Mapper/MappingMode";
 import Integer from "../../src/DataType/Integer";
 import Database from "../../src/Database/Database";
-import DatabaseDecorator from '../../src/Database/Decorator/Database'
-import EntityName from '../../src/Database/Decorator/EntityName'
 import String from "../../src/DataType/String";
 import {ManyToOneType} from "../../src/DataType/ManyToOne";
 import Id from "../../src/Database/Decorator/Id";
 import ModelMapper from "../../src/Mapper/ModelMapper";
+import Entity from "../../src/Database/Decorator/Entity";
 
 const db = new Database()
 
-@DatabaseDecorator(db)
-@EntityName('TestModel')
+@Entity({
+    name: 'TestModel',
+    database: db
+})
 class TestModel extends Model {
     child: ChildModel = null
 }
 
-@DatabaseDecorator(db)
-@EntityName('ChildModel')
+@Entity({
+    name: 'ChildModel',
+    database: db
+})
 class ChildModel extends Model {
     @Id()
     @Integer()

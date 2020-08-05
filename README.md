@@ -22,9 +22,14 @@ getters properties and whatever you want. All you have to do to make your class 
 is describing properties with type annotations
 
 ```typescript
+// Create database
+const database = new Database()
+
 // Post
-@Database(database)
-@EntityName('post')
+@Entity({
+    name: 'post',
+    database: database
+})
 class Post extends Model {
     @Id()
     @String()
@@ -38,8 +43,10 @@ class Post extends Model {
 }
 
 // Comment
-@Database(database)
-@EntityName('comment')
+@Entity({
+    name: 'comment',
+    database: database
+})
 class Comment extends Model {
     @Id()
     @String()

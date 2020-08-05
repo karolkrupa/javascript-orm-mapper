@@ -5,7 +5,6 @@ import Database from "../../src/Database/Database";
 import MappingHelper from "../../src/Mapper/MappingHelper";
 import Type from "../../src/DataType/Type";
 import MappingMode from "../../src/Mapper/MappingMode";
-import {BooleanType} from "../../src/DataType/Boolean";
 
 
 class Entity extends Model {

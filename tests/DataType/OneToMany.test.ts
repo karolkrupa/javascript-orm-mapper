@@ -2,21 +2,24 @@ import {expect} from 'chai'
 import Model from "../../src/Model";
 import MappingMode from "../../src/Mapper/MappingMode";
 import Database from "../../src/Database/Database";
-import DatabaseDecorator from '../../src/Database/Decorator/Database'
-import EntityName from '../../src/Database/Decorator/EntityName'
 import String from "../../src/DataType/String";
 import {OneToManyType} from "../../src/DataType/OneToMany";
+import Entity from "../../src/Database/Decorator/Entity";
 
 const db = new Database()
 
-@DatabaseDecorator(db)
-@EntityName('TestModel')
+@Entity({
+    name: 'TestModel',
+    database: db
+})
 class TestModel extends Model {
     children: ChildModel[] = []
 }
 
-@DatabaseDecorator(db)
-@EntityName('ChildModel')
+@Entity({
+    name: 'ChildModel',
+    database: db
+})
 class ChildModel extends Model {
     @String()
     name: string = ''
