@@ -1,6 +1,6 @@
 {
   "name": "javascript-orm-mapper",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Javascript orm mapper",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -8,6 +8,27 @@
     "test": "mocha -r ts-node/register $(find tests -name '*.ts') --recursive",
     "test:coverage": "nyc --reporter=html npm run test"
   },
+  "keywords": [
+    "orm",
+    "mongo",
+    "mongodb",
+    "mysql",
+    "mariadb",
+    "postgresql",
+    "sqlite",
+    "sqlite3",
+    "ts",
+    "typescript",
+    "js",
+    "javascript",
+    "entity",
+    "javascript-orm-mapper",
+    "data-mapper",
+    "identity-map",
+    "vue",
+    "vuex",
+    "nuxt"
+  ],
   "author": "Karol Krupa (karo2krupa@gmail.com)",
   "license": "MIT",
   "dependencies": {

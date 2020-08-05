@@ -1,16 +1,17 @@
 import Database from "./Database/Database";
+import DatabaseInterface from "./Database/DatabaseInterface";
 import ModelMapper from "./Mapper/ModelMapper";
 import Model from "./Model";
 import MappingHelper from "./Mapper/MappingHelper";
 
-import DatabaseDecorator from "./Database/Decorator/Database"
-import EntityNameDecorator from "./Database/Decorator/EntityName"
+import EntityDecorator from './Database/Decorator/Entity'
+import IdDecorator from './Database/Decorator/Id'
 
 import types from './DataType'
 
 const decorators = {
-    EntityDatabase: DatabaseDecorator,
-    EntityName: EntityNameDecorator
+    Entity: EntityDecorator,
+    Id: IdDecorator
 }
 
 export default {
@@ -26,7 +27,10 @@ export {
     decorators,
     types,
     Database,
+    DatabaseInterface,
     ModelMapper,
     Model,
-    MappingHelper
+    MappingHelper,
+    EntityDecorator as Entity,
+    IdDecorator as Id
 }
