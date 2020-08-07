@@ -17,7 +17,7 @@ describe('Database', function () {
             name: string = ''
         }
 
-        let entity = ModelMapper.persist({
+        let entity = ModelMapper.persistData({
             name: 'test'
         }, SimpleEntity)
 

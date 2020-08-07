@@ -122,7 +122,7 @@ describe('ManyToOne type', function () {
             id: 1
         }
 
-        let entityInDb = ModelMapper.persist(data, ChildModel)
+        let entityInDb = ModelMapper.persistData(data, ChildModel)
 
         type.map(entity, 'child', data, MappingMode.CREATE)
         expect(entity.child).equals(entityInDb)

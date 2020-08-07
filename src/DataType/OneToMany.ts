@@ -44,7 +44,7 @@ export class OneToManyType extends Type {
         for (let entityData of data) {
             let entity = database.getById(model, entityData[idField])
             if(!entity) {
-                entity = ModelMapper.persist(entityData, model)
+                entity = ModelMapper.persistData(entityData, model)
             }
             returnArray.push(entity)
         }

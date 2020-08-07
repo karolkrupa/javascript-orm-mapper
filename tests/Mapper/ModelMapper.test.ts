@@ -60,7 +60,7 @@ describe('Model mapper', function () {
     })
 
     it('should persist entity data in database with id', function () {
-        let entity = ModelMapper.persist({
+        let entity = ModelMapper.persistData({
             id: 1,
             extra_field: 'test'
         }, ExampleEntity);
@@ -84,7 +84,7 @@ describe('Model mapper', function () {
     })
 
     it('when persisting entity exist in database should map data to existing entity', function () {
-        let entity = ModelMapper.persist({
+        let entity = ModelMapper.persistData({
             id: 1,
             extra_field: 'test'
         }, ExampleEntity);
@@ -93,7 +93,28 @@ describe('Model mapper', function () {
         expect(entity).to.have.property('id').and.equals(1)
         expect(database.getById(ExampleEntity, 1)).eq(entity)
 
-        let newEntity = ModelMapper.persist({
+        let newEntity = ModelMapper.persistData({
+            id: 1,
+            extra_field: 'test1'
+        }, ExampleEntity);
+
+        expect(newEntity).eq(entity)
+    })
+
+    it('should persist entity without id with data with id', function () {
+        let entity = new ExampleEntity()
+        entity.name = 'name'
+
+        ModelMapper.persistEntityWithData(entity, {
+            id: 1,
+            extra_field: 'test'
+        });
+
+        expect(entity).to.not.have.property('extra_field')
+        expect(entity).to.have.property('id').and.equals(1)
+        expect(database.getById(ExampleEntity, 1)).eq(entity)
+
+        let newEntity = ModelMapper.persistData({
             id: 1,
             extra_field: 'test1'
         }, ExampleEntity);

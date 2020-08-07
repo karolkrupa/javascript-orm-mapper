@@ -41,7 +41,7 @@ export class ManyToOneType extends Type {
         }
 
         if(!entity) {
-            entity = ModelMapper.persist(data, model)
+            entity = ModelMapper.persistData(data, model)
         }else {
             ModelMapper.map(data, entity)
         }

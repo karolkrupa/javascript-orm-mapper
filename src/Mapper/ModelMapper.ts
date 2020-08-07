@@ -15,7 +15,14 @@ export default class ModelMapper {
         }
     }
 
+    /**
+     * @deprecated
+     */
     static persist(data: {}, model: typeof Model, mode: MappingMode = MappingMode.INSERT) {
+        return this.persistData(data, model, mode);
+    }
+
+    static persistData(data: {}, model: typeof Model, mode: MappingMode = MappingMode.INSERT) {
         let entity = null
         let idFieldName = MappingHelper.getObjectIdFieldName(model)
 
@@ -39,6 +46,20 @@ export default class ModelMapper {
 
     static persistEntity(entity: Model) {
         MappingHelper.getDatabase(entity).persist(entity)
+
+        return entity
+    }
+
+    static persistEntityWithData(entity: Model, data, mode: MappingMode = MappingMode.INSERT) {
+        let idFieldName = MappingHelper.getObjectIdFieldName(entity)
+
+        if(data[idFieldName]) {
+            entity[idFieldName] = data[idFieldName]
+        }
+
+        MappingHelper.getDatabase(entity).persist(entity)
+
+        this.map(data, entity, mode)
 
         return entity
     }
