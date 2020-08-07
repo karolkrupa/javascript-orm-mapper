@@ -5,6 +5,8 @@ import Database from "../../src/Database/Database";
 import String from "../../src/DataType/String";
 import {OneToManyType} from "../../src/DataType/OneToMany";
 import Entity from "../../src/Database/Decorator/Entity";
+import {Id} from "../../src";
+import Integer from "../../src/DataType/Integer";
 
 const db = new Database()
 
@@ -21,6 +23,10 @@ class TestModel extends Model {
     database: db
 })
 class ChildModel extends Model {
+    @Id()
+    @Integer()
+    id: number = null
+
     @String()
     name: string = ''
 }
@@ -61,6 +67,34 @@ describe('OneToMany type', function () {
                 name: 'test1'
             }
         ]
+
+        type.map(entity, 'children', data, MappingMode.INSERT)
+        expect(entity.children).length(2)
+        expect(entity.children[0]).to.property('name').exist.and.equals('test')
+        expect(entity.children[1]).to.property('name').exist.and.equals('test1')
+    })
+
+    it('should not duplicate entities', function () {
+        let type = new OneToManyType('ChildModel')
+        type.setModel(TestModel)
+
+        let entity = new TestModel()
+
+        let data = [
+            {
+                id: 1,
+                name: 'test'
+            },
+            {
+                id: 2,
+                name: 'test1'
+            }
+        ]
+
+        type.map(entity, 'children', data, MappingMode.INSERT)
+        expect(entity.children).length(2)
+        expect(entity.children[0]).to.property('name').exist.and.equals('test')
+        expect(entity.children[1]).to.property('name').exist.and.equals('test1')
 
         type.map(entity, 'children', data, MappingMode.INSERT)
         expect(entity.children).length(2)

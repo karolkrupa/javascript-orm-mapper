@@ -22,14 +22,23 @@ export class OneToManyType extends Type {
             }
 
             if(newData.length > 0) {
-                entity[field] = [
-                    ...entity[field],
-                    ...newData
-                ]
+                entity[field] = this.mergeEntitiesArray(newData, entity[field])
             }
         }else if(mappingMode == MappingMode.CREATE) {
             entity[field] = newData
         }
+    }
+
+    protected mergeEntitiesArray(newData: any[], oldData: any[]) {
+        let merged = [...oldData]
+
+        for(let item of newData) {
+            if(oldData.indexOf(item) < 0) {
+                merged.push(item)
+            }
+        }
+
+        return merged
     }
 
     public normalize(data: any): any {
