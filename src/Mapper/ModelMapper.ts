@@ -29,6 +29,7 @@ export default class ModelMapper {
             }
         }else {
             entity = new (model)()
+            MappingHelper.getDatabase(model).persist(entity)
         }
 
         this.map(data, entity, mode)

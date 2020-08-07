@@ -1,10 +1,12 @@
 {
   "name": "javascript-orm-mapper",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Javascript orm mapper",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
+    "build": "rm -rf dist && tsc",
+    "deploy": "npm run build && npm run test",
     "test": "mocha -r ts-node/register $(find tests -name '*.ts') --recursive",
     "test:coverage": "nyc --reporter=html npm run test"
   },

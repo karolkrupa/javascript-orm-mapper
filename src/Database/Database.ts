@@ -8,6 +8,10 @@ type EntitiesMap = {
     [uuid: string]: Model
 }
 
+type EntitiesByNameMap = {
+    [uuid: string]: Model[]
+}
+
 type EntitiesKeysMap = {
     [entityName: string]: {
         // primaryKey: entityUUID
@@ -16,10 +20,12 @@ type EntitiesKeysMap = {
 }
 
 
-export default class Database implements DatabaseInterface{
+export default class Database implements DatabaseInterface {
     protected entitiesKeys: EntitiesKeysMap = {}
 
     protected entities: EntitiesMap = {}
+
+    protected entitiesByName: EntitiesByNameMap = {}
 
     protected modelsRegistry: ModelsRegister = null
 
@@ -28,26 +34,37 @@ export default class Database implements DatabaseInterface{
     }
 
     public persist(entity: Model) {
-        this.assingEntityUUID(entity)
+        if (!this.entityHasUUID(entity)) {
+            this.assingEntityUUID(entity)
+        }
 
-        this.assignEntityToKeyMap(entity)
-        this.entities[this.getEntityUUID(entity)] = entity
+        this.storeEntity(entity)
     }
 
-    protected assignEntityToKeyMap(entity: Model) {
-        let id = MappingHelper.getObjectId(entity)
-
-        if(!id) return
-
+    protected storeEntity(entity: Model) {
         let entityName = MappingHelper.getEntityName(entity)
 
         if (!this.entitiesKeys[entityName]) this.entitiesKeys[entityName] = {}
 
-        this.entitiesKeys[entityName][id] = this.getEntityUUID(entity)
+        this.entities[this.getEntityUUID(entity)] = entity
+        if (!this.entitiesByName[entityName]) {
+            this.entitiesByName[entityName] = [entity]
+        } else if (this.entitiesByName[entityName].indexOf(entity) > -1) {
+            this.entitiesByName[entityName].push(entity)
+        }
+
+        let id = MappingHelper.getObjectId(entity)
+        if (id) {
+            this.entitiesKeys[entityName][id] = this.getEntityUUID(entity)
+        }
     }
 
     protected getEntityUUID(entity: Model) {
         return entity.__orm_uid
+    }
+
+    protected entityHasUUID(entity: Model) {
+        return entity.__orm_uid !== null
     }
 
     protected assingEntityUUID(entity: Model) {
@@ -60,6 +77,16 @@ export default class Database implements DatabaseInterface{
 
     get(ormUUID: string): Model {
         return this.entities[ormUUID];
+    }
+
+    getAll(model: typeof Model) {
+        let entityName = MappingHelper.getEntityName(model)
+
+        if (!this.entitiesByName[entityName]) {
+            return []
+        }
+
+        return this.entitiesByName[entityName]
     }
 
     getById(model: typeof Model, id: string | number): Model {

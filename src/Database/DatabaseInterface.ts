@@ -7,6 +7,8 @@ export default interface DatabaseInterface {
 
     get(ormUUID: string): Model;
 
+    getAll(model: typeof Model);
+
     registerModel(model: typeof Model)
 
     getModel(entityName: string)
