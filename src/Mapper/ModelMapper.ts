@@ -36,4 +36,10 @@ export default class ModelMapper {
 
         return entity
     }
+
+    static persistEntity(entity: Model) {
+        MappingHelper.getDatabase(entity).persist(entity)
+
+        return entity
+    }
 }

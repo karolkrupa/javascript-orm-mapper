@@ -16,7 +16,7 @@ const database = new Database();
 class ExampleEntity extends Model {
     @Id()
     @Integer()
-    id: string
+    id: number
 
     @String()
     name: string = 'my_name'
@@ -59,7 +59,7 @@ describe('Model mapper', function () {
         expect(entity).to.have.property('name').and.equals(null)
     })
 
-    it('should persist entity in database with id', function () {
+    it('should persist entity data in database with id', function () {
         let entity = ModelMapper.persist({
             id: 1,
             extra_field: 'test'
@@ -68,6 +68,19 @@ describe('Model mapper', function () {
         expect(entity).to.not.have.property('extra_field')
         expect(entity).to.have.property('id').and.equals(1)
         expect(database.getById(ExampleEntity, 1)).eq(entity)
+    })
+
+    it('should persist entity in database', function () {
+        let entity = new ExampleEntity()
+        entity.id = 1
+        entity.name = 'name'
+
+        ModelMapper.persistEntity(entity);
+
+        expect(entity).to.not.have.property('extra_field')
+        expect(entity).to.have.property('id').and.equals(1)
+        expect(database.getById(ExampleEntity, 1)).eq(entity)
+        expect(entity.__orm_uid).not.equals(null)
     })
 
     it('when persisting entity exist in database should map data to existing entity', function () {
